@@ -11,7 +11,7 @@ class BMICalculator extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: customTheme(),
-      home: InputPage(),
+      home: const InputPage(),
     );
   }
 }

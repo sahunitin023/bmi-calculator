@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'icon_content.dart';
+import 'reusable_card.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -8,12 +11,19 @@ class InputPage extends StatefulWidget {
   _InputPageState createState() => _InputPageState();
 }
 
+const activeCardColor = Color(0xFf1D1E33);
+const bottomBoxHeight = 80.0;
+const bottomBoxColor = Color(0xFFEB1555);
+
 class _InputPageState extends State<InputPage> {
+  double userHeight = 120.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMI CALCULATOR'),
+        title: const Center(
+          child: Text('BMI CALCULATOR'),
+        ),
       ),
       body: Column(
         children: [
@@ -22,20 +32,64 @@ class _InputPageState extends State<InputPage> {
               children: const [
                 Expanded(
                   child: ReusableCard(
-                    colour: Color(0xFf1D1E33),
+                    colour: activeCardColor,
+                    cardChild: IconContent(
+                      gender: 'MALE',
+                      genderIcon: FontAwesomeIcons.mars,
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: Color(0xFf1D1E33),
+                    colour: activeCardColor,
+                    cardChild: IconContent(
+                      gender: 'FEMALE',
+                      genderIcon: FontAwesomeIcons.venus,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: ReusableCard(
-              colour: Color(0xFf1D1E33),
+              colour: activeCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'HEIGHT',
+                    style: TextStyle(fontSize: 18.0, color: Color(0xFF8D8398)),
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Text(
+                    '$userHeight CM',
+                    style: const TextStyle(
+                      fontSize: 50.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Slider(
+                    thumbColor: bottomBoxColor,
+                    value: userHeight,
+                    min: 120,
+                    max: 200,
+                    divisions: 80,
+                    onChanged: (value) {
+                      setState(() {
+                        userHeight = value;
+                      });
+                    },
+                    activeColor: Colors.white,
+                    inactiveColor: const Color(0xFF8D8398),
+                  )
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -43,33 +97,26 @@ class _InputPageState extends State<InputPage> {
               children: const [
                 Expanded(
                   child: ReusableCard(
-                    colour: Color(0xFf1D1E33),
+                    colour: activeCardColor,
+                    cardChild: Text('data'),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: Color(0xFf1D1E33),
+                    colour: activeCardColor,
+                    cardChild: Text('data'),
                   ),
                 ),
               ],
             ),
           ),
+          Container(
+            margin: const EdgeInsets.only(top: 10.0),
+            color: bottomBoxColor,
+            width: double.infinity,
+            height: bottomBoxHeight,
+          )
         ],
-      ),
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  final Color colour;
-  const ReusableCard({Key? key, required this.colour}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: colour,
       ),
     );
   }
