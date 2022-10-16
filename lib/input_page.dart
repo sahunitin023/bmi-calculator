@@ -91,28 +91,31 @@ class _InputPageState extends State<InputPage> {
                       const Text('cm'),
                     ],
                   ),
-                  SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                      trackHeight: 1.0,
-                      activeTrackColor: Colors.white,
-                      inactiveTrackColor: const Color(0xFF8D8398),
-                      overlayColor: const Color.fromARGB(29, 235, 21, 85),
-                      thumbColor: kBottomBoxColor,
-                      thumbShape:
-                          const RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                      overlayShape:
-                          const RoundSliderOverlayShape(overlayRadius: 30.0),
-                    ),
-                    child: Slider(
-                      value: userHeight.toDouble(),
-                      min: 120,
-                      max: 220,
-                      divisions: 100,
-                      onChanged: (double newValue) {
-                        setState(() {
-                          userHeight = newValue.round();
-                        });
-                      },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        trackHeight: 1.0,
+                        activeTrackColor: Colors.white,
+                        inactiveTrackColor: const Color(0xFF8D8398),
+                        overlayColor: const Color.fromARGB(29, 235, 21, 85),
+                        thumbColor: kBottomBoxColor,
+                        thumbShape: const RoundSliderThumbShape(
+                            enabledThumbRadius: 15.0),
+                        overlayShape:
+                            const RoundSliderOverlayShape(overlayRadius: 30.0),
+                      ),
+                      child: Slider(
+                        value: userHeight.toDouble(),
+                        min: 120,
+                        max: 220,
+                        divisions: 100,
+                        onChanged: (double newValue) {
+                          setState(() {
+                            userHeight = newValue.round();
+                          });
+                        },
+                      ),
                     ),
                   )
                 ],
