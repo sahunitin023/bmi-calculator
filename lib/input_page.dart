@@ -215,12 +215,21 @@ class _InputPageState extends State<InputPage> {
             color: kBottomBoxColor,
             width: double.infinity,
             height: kBottomBoxHeight,
-            child: const Center(
-              child: Text(
-                'CALCULATE',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0,
+            child: TextButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/result',
+                );
+              },
+              child: const Center(
+                child: Text(
+                  'CALCULATE',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                  ),
                 ),
               ),
             ),
