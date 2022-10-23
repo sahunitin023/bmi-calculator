@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class ReusableCard extends StatelessWidget {
   const ReusableCard({required this.colour, this.cardChild, this.onPress});
   final Color colour;

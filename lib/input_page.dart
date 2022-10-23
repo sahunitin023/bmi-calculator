@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,6 +6,7 @@ import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
 import 'round_icon_button.dart';
+import 'bottom_button.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -215,23 +216,14 @@ class _InputPageState extends State<InputPage> {
             color: kBottomBoxColor,
             width: double.infinity,
             height: kBottomBoxHeight,
-            child: TextButton(
-              onPressed: () {
+            child: BottomButton(
+              buttonTitle: 'CALCULATE',
+              onPress: () {
                 Navigator.pushNamed(
                   context,
                   '/result',
                 );
               },
-              child: const Center(
-                child: Text(
-                  'CALCULATE',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22.0,
-                  ),
-                ),
-              ),
             ),
           )
         ],
