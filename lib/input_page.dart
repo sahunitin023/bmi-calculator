@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors
 
+import 'package:bmi_calculator/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
@@ -7,6 +8,7 @@ import 'reusable_card.dart';
 import 'constants.dart';
 import 'round_icon_button.dart';
 import 'bottom_button.dart';
+import 'calculator_brain.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ enum Gender {
 
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
-  int weight = 50;
+  int userWeight = 50;
   int age = 18;
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class _InputPageState extends State<InputPage> {
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
@@ -139,7 +142,7 @@ class _InputPageState extends State<InputPage> {
                           style: kLabelTextStyle,
                         ),
                         Text(
-                          weight.toString(),
+                          userWeight.toString(),
                           style: kNumberTextStyle,
                         ),
                         Row(
@@ -149,7 +152,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.minus,
                               onPress: (() {
                                 setState(() {
-                                  weight--;
+                                  userWeight--;
                                 });
                               }),
                             ),
@@ -158,7 +161,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.plus,
                               onPress: (() {
                                 setState(() {
-                                  weight++;
+                                  userWeight++;
                                 });
                               }),
                             ),
@@ -211,20 +214,22 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 10.0),
-            color: kBottomBoxColor,
-            width: double.infinity,
-            height: kBottomBoxHeight,
-            child: BottomButton(
-              buttonTitle: 'CALCULATE',
-              onPress: () {
-                Navigator.pushNamed(
-                  context,
-                  '/result',
-                );
-              },
-            ),
+          BottomButton(
+            buttonTitle: 'CALCULATE',
+            onPress: () {
+              CalculatorBrain calc =
+                  CalculatorBrain(height: userHeight, weight: userWeight);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultPage(
+                    bmiResult: calc.calculateBMI(),
+                    resultText: calc.getResult(),
+                    interpretation: calc.getInterpretation(),
+                  ),
+                ),
+              );
+            },
           )
         ],
       ),

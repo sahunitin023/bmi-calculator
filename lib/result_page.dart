@@ -1,21 +1,23 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'bottom_button.dart';
 
-class ResultPage extends StatefulWidget {
-  const ResultPage({Key? key}) : super(key: key);
-
-  @override
-  State<ResultPage> createState() => _ResultPageState();
-}
-
-class _ResultPageState extends State<ResultPage> {
+class ResultPage extends StatelessWidget {
+  const ResultPage(
+      {required this.bmiResult,
+      required this.resultText,
+      required this.interpretation});
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('         BMI CALCULATOR'),
+        title: const Text('        BMI CALCULATOR'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,22 +44,22 @@ class _ResultPageState extends State<ResultPage> {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
-                    'NORMAL',
+                    resultText,
                     style: kResultTextStyle,
                   ),
                   Text(
-                    '22.1',
-                    style: TextStyle(
+                    bmiResult,
+                    style: const TextStyle(
                       fontSize: 100.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'You have normal Body Weight. Good Job!!',
+                    interpretation,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
                     ),
@@ -66,16 +68,11 @@ class _ResultPageState extends State<ResultPage> {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 30.0),
-            color: kBottomBoxColor,
-            height: kBottomBoxHeight,
-            child: BottomButton(
-              onPress: () {
-                Navigator.pop(context);
-              },
-              buttonTitle: 'RE-CALCULATE',
-            ),
+          BottomButton(
+            onPress: () {
+              Navigator.pop(context);
+            },
+            buttonTitle: 'RE-CALCULATE',
           )
         ],
       ),
